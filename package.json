@@ -10,7 +10,12 @@
     "format": "prettier --write .",
     "test": "vitest"
   },
+  "dependencies": {
+    "ejs": "^3.1.10"
+  },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/node": "^20.14.9",
     "prettier": "^3.3.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",
