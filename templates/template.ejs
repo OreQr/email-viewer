@@ -4,8 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email viewer</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: monospace;
+        font-size: 1rem;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin-block: 0;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 5px;
+        text-align: left;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        padding-top: 8px;
+        margin-left: 8px;
+        margin-right: 8px;
+        position: sticky;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+      }
+
+      header > * + * {
+        margin-top: 8px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      iframe {
+        height: 100vh;
+        width: 100%;
+        margin: 8px;
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
-    <%= email %>
+    <header>
+      <h3>Email viewer</h3>
+      <table>
+        <% if (options.subject) { %>
+        <tr>
+          <th>Subject</th>
+          <td><%= options.subject %></td>
+        </tr>
+        <% } %> <% if (options.from) { %>
+        <tr>
+          <th>From</th>
+          <td><%= options.from %></td>
+        </tr>
+        <% } %> <% if (options.to) { %>
+        <tr>
+          <th>To</th>
+          <td><%= options.to %></td>
+        </tr>
+        <% } %>
+      </table>
+    </header>
+    <div class="container">
+      <% if (options.html) { %>
+      <iframe
+        srcdoc="<base target='_top'><%= options.html %>"
+        frameborder="0"
+      />
+      <% } %> <% if (options.text) { %>
+      <iframe srcdoc="<pre><%= options.text %></pre>" frameborder="0" />
+      <% } %>
+    </div>
   </body>
 </html>
