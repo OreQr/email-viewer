@@ -20,7 +20,7 @@ export interface ViewEmailResult {
   id: string
   html: string
 }
-const viewEmail = (options: ViewEmailOptions): ViewEmailResult => {
+export const viewEmail = (options: ViewEmailOptions): ViewEmailResult => {
   const { id = randomUUID(), dir = os.tmpdir(), open = true } = options
 
   const html = ejs.render(template, { options })
@@ -33,5 +33,3 @@ const viewEmail = (options: ViewEmailOptions): ViewEmailResult => {
 
   return { id, html }
 }
-
-export default viewEmail

@@ -1,6 +1,6 @@
 import { test, assert } from "vitest"
 
-import viewEmail from "email-viewer"
+import { viewEmail } from "email-viewer"
 
 test("function", () => {
   const view = viewEmail({
