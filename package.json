@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "OreQr",
   "description": "📧Opens browser with email preview",
+  "repository": {
+    "url": "https://github.com/OreQr/email-viewer"
+  },
   "keywords": [
     "nodejs",
     "automation",
