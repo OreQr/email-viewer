@@ -26,7 +26,8 @@
     "build": "tsup",
     "lint": "tsc",
     "format": "prettier --write .",
-    "test": "vitest"
+    "test": "vitest",
+    "test:open": "cross-env OPEN=true vitest"
   },
   "dependencies": {
     "ejs": "^3.1.10",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/node": "^20.14.9",
+    "cross-env": "^7.0.3",
     "prettier": "^3.3.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",

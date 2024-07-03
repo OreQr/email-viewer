@@ -5,7 +5,7 @@ import { viewEmail } from "email-viewer"
 test("function", () => {
   const view = viewEmail({
     id: "test",
-    open: true,
+    open: !!process.env.OPEN,
     subject: "test subject",
     from: "test from",
     to: "test to",
