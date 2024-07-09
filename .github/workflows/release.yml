@@ -1,0 +1,59 @@
+name: Publish
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: "Build"
+        run: pnpm run build
+
+      - name: Publish
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract version
+        id: extractVersion
+        run: |
+          version=$(grep '"version"' package.json | sed -E 's/.*"version": "(.*)".*/\1/')
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              ref: 'refs/tags/v${{ steps.extractVersion.outputs.version }}'
+            })
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.extractVersion.outputs.version }}
+          generate_release_notes: true
