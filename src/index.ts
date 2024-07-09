@@ -2,9 +2,10 @@ import { randomUUID } from "crypto"
 import ejs from "ejs"
 import template from "templates/template.ejs"
 import os from "os"
-import openFile from "open"
 import path from "path"
 import fs from "fs"
+import openFile from "open"
+import { openExplorer } from "./open"
 
 export interface ViewEmailOptions {
   id?: string
@@ -28,7 +29,13 @@ export const viewEmail = (options: ViewEmailOptions): ViewEmailResult => {
   if (open) {
     const filePath = path.join(dir, `${id}.html`)
     fs.writeFileSync(filePath, html)
-    openFile(`file://${filePath}`)
+
+    const target = `file://${filePath}`
+    if (process.platform === "win32") {
+      openExplorer(target)
+    } else {
+      openFile(target)
+    }
   }
 
   return { id, html }

@@ -1,6 +1,6 @@
 {
   "name": "email-viewer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "OreQr",
   "description": "📧Opens browser with email preview",
