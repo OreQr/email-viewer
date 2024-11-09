@@ -25,7 +25,8 @@
   "scripts": {
     "build": "tsup",
     "lint": "tsc",
-    "format": "prettier --write .",
+    "format:check": "prettier --write . --cache",
+    "format:write": "prettier --write . --cache",
     "test": "vitest",
     "test:open": "cross-env OPEN=true vitest"
   },
