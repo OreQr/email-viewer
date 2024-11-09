@@ -1,6 +1,6 @@
 {
   "name": "email-viewer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "author": "OreQr",
   "description": "📧Opens browser with email preview",
@@ -36,13 +36,13 @@
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
-    "@types/node": "^20.14.9",
+    "@types/node": "^22.9.0",
     "cross-env": "^7.0.3",
     "prettier": "^3.3.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",
-    "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.6.0"
+    "vite-tsconfig-paths": "^5.1.1",
+    "vitest": "^2.1.4"
   },
   "packageManager": "pnpm@9.1.4"
 }
